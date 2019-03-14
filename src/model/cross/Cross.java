@@ -1,5 +1,7 @@
 package model.cross;
 
-public interface Cross {
+import model.entities.Pair;
 
+public interface Cross {
+	public Pair apply(Pair parents);
 }

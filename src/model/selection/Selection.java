@@ -1,5 +1,7 @@
 package model.selection;
 
-public interface Selection {
+import model.entities.Population;
 
+public interface Selection {
+	public Population apply(Population source);
 }

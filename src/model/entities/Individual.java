@@ -11,9 +11,9 @@ public class Individual {
 	private int _fitness;
 	
 	
-	/*Constructor
-	 * size:the size of the gene array to be constructed
-	 * resulting array will be 0 + random permutation of numbers from 1 to size
+	/**Constructor: generates an array that starts with 0, following with a random permutation of 
+	 * the numbers (1..size-1)
+	 * @size: the size of the gene array to be constructed
 	 */
 	public Individual(int size) {
 		if(size<1) {
@@ -31,7 +31,7 @@ public class Individual {
 		}
 	}
 	
-	/* Copy constructor */
+	/** Copy constructor */
 	public Individual(Individual other) {
 		_genes=new int[other.length()];
 		for(int i=0;i<_genes.length;i++) {
@@ -41,7 +41,7 @@ public class Individual {
 	}
 	
 	
-	//Adds distances, including from the last city to the first one
+	/**Adds distances, including from the last city to the first one*/
 	public void evaluate() {
 		Distances dist=Distances.getInstance();
 		int result=0;
@@ -53,7 +53,9 @@ public class Individual {
 	}
 	
 	
-	//returns a random Integer form a list of Integers
+	/**returns a random Integer form a list of Integers
+	 * Note:this maybe should not be here
+	 * */
 	private int getRandomNumber(List<Integer> list) {
 		int index=(int) (Math.random()*list.size());
 		int nr=list.get(index);
