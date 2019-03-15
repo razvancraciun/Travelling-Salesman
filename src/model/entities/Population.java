@@ -1,8 +1,5 @@
 package model.entities;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import model.Distances;
 import model.cross.Cross;
 
@@ -39,7 +36,8 @@ public class Population {
 	/** Calls the evaluate() method of each individual, thus updating their fitness 
 	 *  Also updates the _bestFitness and _bestFitnessThisGeneration fields if there is the case
 	 */
-	public void evaluate() {		
+	public void evaluate() {
+		_bestFitnessThisGeneration=Integer.MAX_VALUE;
 		for(int i=0;i<_population.length;i++) {
 			_population[i].evaluate();
 			int fitness=_population[i].getFitness();
@@ -54,22 +52,21 @@ public class Population {
 	
 	//TODO : DOC
 	public void cross(Cross cross, double crossChance) {
-		List<Pair> pairs = new LinkedList<Pair>();
 		int chosen=0;
-		Individual previous=null;
+		int previous=-1;
 		for(int i=0;i<_population.length;i++) {
 			if(Math.random()<=crossChance) {
 				chosen++;
 				if(chosen%2==0) {
-					pairs.add(new Pair(previous,_population[i]));
+					Pair pair=cross.apply(_population[previous], _population[i]);
+					_population[previous]=pair.getFirst();
+					_population[i]=pair.getSecond();
+					
 				}
 				else {
-					previous=_population[i];
+					previous=i;
 				}
 			}
-		}
-		for(Pair x : pairs) {
-			cross.apply(x);
 		}
 	}
 	
@@ -86,17 +83,31 @@ public class Population {
 	}
 	
 	//GETTERS & SETTERS
-	private int length() {
+	public int length() {
 		return _population.length;
 	}
-	private Individual getIndividual(int i) {
+	public Individual getIndividual(int i) {
 		return _population[i];
 	}
-	private int getBestFitnessThisGeneration() {
+	public int getBestFitnessThisGeneration() {
 		return _bestFitnessThisGeneration;
 	}
 
-	private int getBestFitness() {
+	public int getBestFitness() {
 		return _bestFitness;
+	}
+	
+	public int getMaximumFitness() {
+		int max=_population[0].getFitness();
+		for(int i=1;i<_population.length;i++) {
+			if(_population[i].getFitness()>max) {
+				max=_population[i].getFitness();
+			}
+		}
+		return max;
+	}
+	
+	public void setIndividual(int index,Individual ind) {
+		_population[index]=ind;
 	}
 }

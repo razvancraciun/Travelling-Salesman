@@ -10,7 +10,6 @@ public class Individual {
 	private int[] _genes;
 	private int _fitness;
 	
-	
 	/**Constructor: generates an array that starts with 0, following with a random permutation of 
 	 * the numbers (1..size-1)
 	 * @size: the size of the gene array to be constructed
@@ -77,10 +76,37 @@ public class Individual {
 	public int getGene(int index) {
 		return _genes[index];
 	}
+	public void setGene(int index, int value) {
+		_genes[index]=value;
+	}
 	public int length() {
 		return _genes.length;
 	}
 	public int getFitness() {
 		return _fitness;
+	}
+	public boolean hasGene(int value) {
+		for(int i=0;i<_genes.length;i++) {
+			if(_genes[i]==value)
+				return true;
+		}
+		return false;
+	}
+
+	public int getGeneIndex(int value) {
+		for(int i=0;i<_genes.length;i++) {
+			if(_genes[i]==value)
+				return i;
+		}
+		throw new IllegalArgumentException("Gene not found");
+	}
+	
+	public boolean valid() {
+		int sum=0;
+		for(int i=0;i<_genes[i];i++) {
+			sum+=i;
+			sum-=_genes[i];
+		}
+		return sum==0;
 	}
 }

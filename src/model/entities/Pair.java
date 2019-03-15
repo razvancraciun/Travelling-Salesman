@@ -4,6 +4,7 @@ public class Pair {
 	private Individual _first;
 	private Individual _second;
 	
+	//TODO DOC
 	public Pair(Individual first, Individual second) {
 		if(first==null || second==null) {
 			throw new NullPointerException("Trying to make pair with null Individual");

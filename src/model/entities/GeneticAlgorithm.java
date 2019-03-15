@@ -23,6 +23,7 @@ public class GeneticAlgorithm {
 		_selection=selection;
 		_mutation=mutation;
 		_cross=cross;
+		_crossChance=crossChance;
 		
 		//first evaluation
 		_population.evaluate();
@@ -34,8 +35,13 @@ public class GeneticAlgorithm {
 		_population=_selection.apply(_population);
 		_population.cross(_cross,_crossChance);
 		//TODO: apply mutation
+		
+		_population.evaluate();
 	}
 	
+	public String toString() {
+		return _population.toString();
+	}
 	
 	
 }
