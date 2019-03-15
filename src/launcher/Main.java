@@ -5,6 +5,7 @@ import model.Distances;
 import model.cross.Cross;
 import model.cross.NoCross;
 import model.cross.PMX;
+import model.entities.Elite;
 import model.entities.GeneticAlgorithm;
 import model.entities.Individual;
 import model.entities.Population;
@@ -17,15 +18,18 @@ import model.selection.Selection;
 public class Main {
 
 	public static void main(String[] args) {
-		Distances dist=Distances.getInstance();
 		
-		Population pop=new Population(10);
+		Population population=new Population(100);
 		Mutation mutation= new NoMutation();
 		Selection selection= new Roulette();
-		Cross cross=new NoCross();
-		double crossChance=1;
-		GeneticAlgorithm ga= new GeneticAlgorithm(pop, mutation,selection,cross,crossChance);
+		Cross cross=new PMX();
+		double crossChance=0.6;
+		double mutationChance=0.05;
+		double elitism=0.05;
+		Elite elite = new Elite(population,elitism);
+		GeneticAlgorithm ga= new GeneticAlgorithm(population, mutation,selection,cross,crossChance,mutationChance,elitism);
 		Controller ctrl=new Controller(ga);
-		ctrl.run(10);
+		ctrl.run(100);
+		
 	}
 }

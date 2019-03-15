@@ -10,6 +10,8 @@ public class GeneticAlgorithm {
 	public Selection _selection;
 	public Cross _cross;
 	public double _crossChance;
+	public double _mutationChance;
+	public double _elitism;
 	
 	
 	/** Initializes the genetic algorithm parameters 
@@ -17,13 +19,19 @@ public class GeneticAlgorithm {
 	 * @mutation : the mutation type that will be applied
 	 * @selection : the selection type that will be applied
 	 * @cross : the cross type that will be applied
-	 * @crossChance : the chance that an individual will be selected for cross*/
-	public GeneticAlgorithm(Population population, Mutation mutation,Selection selection, Cross cross, double crossChance) {
+	 * @crossChance : the chance that an individual will be selected for cross
+	 * @mutationChance: the chance for a mutation to occur
+	 * @elitism : coefficient of the population size that will be considered elites
+	 * */
+	public GeneticAlgorithm(Population population, Mutation mutation,Selection selection, Cross cross, 
+			double crossChance, double mutationChance, double elitism) {
 		_population=population;
 		_selection=selection;
 		_mutation=mutation;
 		_cross=cross;
 		_crossChance=crossChance;
+		_mutationChance=mutationChance;
+		_elitism=elitism;
 		
 		//first evaluation
 		_population.evaluate();
@@ -32,10 +40,11 @@ public class GeneticAlgorithm {
 	
 	/** Advances one generation */
 	public void nextGeneration() {
+		Elite elite=new Elite(_population,_elitism);
 		_population=_selection.apply(_population);
 		_population.cross(_cross,_crossChance);
-		//TODO: apply mutation
-		
+		_population=_mutation.apply(_population,_mutationChance);
+		elite.replaceWorst(_population);
 		_population.evaluate();
 	}
 	

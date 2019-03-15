@@ -1,5 +1,8 @@
 package model.entities;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import model.Distances;
 import model.cross.Cross;
 
@@ -50,7 +53,11 @@ public class Population {
 		}
 	}
 	
-	//TODO : DOC
+	/**
+	 * Crosses Individuals based on the crossChance creating new child Individuals
+	 * @param cross : The cross method to be used
+	 * @param crossChance The chance that an Individual will be selected for cross
+	 */
 	public void cross(Cross cross, double crossChance) {
 		int chosen=0;
 		int previous=-1;
@@ -70,8 +77,21 @@ public class Population {
 		}
 	}
 	
-
-	
+	/**
+	 * Sorts Individuals by fitness. The ones with the best values will be first (lowest fitness since we want to minimise function)
+	 */
+	public void sort() {
+		Arrays.sort(_population, new Comparator<Individual>() {
+			public int compare(Individual first, Individual second) {
+				if(first.getFitness()<second.getFitness()) {
+					return -1;
+				}
+				else if(first.getFitness()==second.getFitness()) 
+					return 0;
+				else return 1;
+			}
+		});
+	}
 
 	public String toString() {
 		String result= "";

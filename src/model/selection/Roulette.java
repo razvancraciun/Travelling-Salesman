@@ -5,6 +5,7 @@ import model.entities.Population;
 
 public class Roulette implements Selection {
 
+	//TODO DOC
 	@Override
 	public Population apply(Population source) {
 		Population result=new Population(source.length());
@@ -36,6 +37,7 @@ public class Roulette implements Selection {
 		return result;
 	}
 
+	//TODO DOC
 	private Individual pickOne(Population source, double[] relativeFitness) {
 		double prob=Math.random();
 		double sum=0.0;

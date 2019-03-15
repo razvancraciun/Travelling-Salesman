@@ -1,5 +1,7 @@
 package model.mutation;
 
-public interface Mutation {
+import model.entities.Population;
 
+public interface Mutation {
+	public Population apply(Population origin,double chance);
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 import model.Distances;
 
-public class Individual {
+public class Individual  {
 	
 	private int[] _genes;
 	private int _fitness;
@@ -62,6 +62,17 @@ public class Individual {
 		return nr;
 	}
 	
+	/** Checks if the Individual's genes are a permutation of numbers from 0 to _genes.length-1
+	 */
+	public boolean valid() {
+		int sum=0;
+		for(int i=0;i<_genes[i];i++) {
+			sum+=i;
+			sum-=_genes[i];
+		}
+		return sum==0;
+	}
+	
 	public String toString() {
 		String result="";
 		for(int i=0;i<_genes.length;i++) {
@@ -85,6 +96,8 @@ public class Individual {
 	public int getFitness() {
 		return _fitness;
 	}
+	
+	/** Checks if the _genes array contains a particular value */
 	public boolean hasGene(int value) {
 		for(int i=0;i<_genes.length;i++) {
 			if(_genes[i]==value)
@@ -100,13 +113,5 @@ public class Individual {
 		}
 		throw new IllegalArgumentException("Gene not found");
 	}
-	
-	public boolean valid() {
-		int sum=0;
-		for(int i=0;i<_genes[i];i++) {
-			sum+=i;
-			sum-=_genes[i];
-		}
-		return sum==0;
-	}
+
 }
