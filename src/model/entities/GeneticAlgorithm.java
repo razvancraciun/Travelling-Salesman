@@ -43,7 +43,7 @@ public class GeneticAlgorithm {
 		Elite elite=new Elite(_population,_elitism);
 		_population=_selection.apply(_population);
 		_population.cross(_cross,_crossChance);
-		_population=_mutation.apply(_population,_mutationChance);
+		_population.mutate(_mutation,_mutationChance);
 		elite.replaceWorst(_population);
 		_population.evaluate();
 	}

@@ -24,7 +24,7 @@ This repository is still under construction and not yet usable.
   - Variants of OX??
   - Some own method
 - Mutation
-  - Insertion
+  - ~~Insertion~~
   - Exchange
   - Investment
   - Heuristics

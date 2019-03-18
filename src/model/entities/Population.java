@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 import model.Distances;
 import model.cross.Cross;
+import model.mutation.Mutation;
 
 public class Population {
 	private Individual[] _population;
@@ -73,6 +74,16 @@ public class Population {
 				else {
 					previous=i;
 				}
+			}
+		}
+	}
+	
+	
+	//TODO DOC
+	public void mutate(Mutation mutation,double chance) {
+		for(int i=0;i<_population.length;i++) {
+			if(Math.random()<chance) {
+				_population[i]=mutation.apply(_population[i]);
 			}
 		}
 	}
