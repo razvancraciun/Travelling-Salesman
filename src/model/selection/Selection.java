@@ -4,4 +4,5 @@ import model.entities.Population;
 
 public interface Selection {
 	public Population apply(Population source);
+	public String toString();
 }

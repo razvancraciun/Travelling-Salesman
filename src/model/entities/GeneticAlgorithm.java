@@ -51,6 +51,16 @@ public class GeneticAlgorithm {
 	public String toString() {
 		return _population.toString();
 	}
+
+	public Selection getSelection() {
+		return _selection;
+	}
+	public Mutation getMutation() {
+		return _mutation;
+	}
+	public Cross getCross() {
+		return _cross;
+	}
 	
 	
 }

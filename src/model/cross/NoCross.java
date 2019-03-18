@@ -11,4 +11,7 @@ public class NoCross implements Cross {
 		return new Pair(parent1,parent2);
 	}
 
+	public String toString() {
+		return "No Cross";
+	}
 }

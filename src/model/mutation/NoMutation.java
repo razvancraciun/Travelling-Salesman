@@ -10,4 +10,7 @@ public class NoMutation implements Mutation {
 		return origin;
 	}
 
+	public String toString() {
+		return "No Mutation";
+	}
 }

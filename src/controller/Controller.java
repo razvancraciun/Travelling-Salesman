@@ -15,9 +15,10 @@ public class Controller {
 	
 	//TODO DOC
 	public void run(int generations) {
+		System.out.println(_alg.getSelection()+" "+_alg.getMutation() + " "+ _alg.getCross());
 		for(int i=0;i<generations;i++) {
 			_alg.nextGeneration();
-			System.out.println(_alg);
+			//System.out.println(_alg);
 		}
 	}
 }

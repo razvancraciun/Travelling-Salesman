@@ -8,7 +8,7 @@ This repository is still under construction and not yet usable.
 - ~~Basic class structure(MVC)~~
 - ~~Entities (Individual, Population)~~
 - ~~Evaluation~~
-- Elitism
+- ~~Elitism~~
 - Selection:
   - ~~Roulette~~ 
   - Truncaction
@@ -24,12 +24,12 @@ This repository is still under construction and not yet usable.
   - Variants of OX??
   - Some own method
 - Mutation
-  - ~~Insertion~~
-  - Exchange
-  - Investment
+  - ~~Inversion~~
+  - ~~Exchange~~
+  - Insertion
   - Heuristics
   - Some own method
 - Controller
 - View
-  - Control Panel
+  - ~~Control Panel~~
   - Plot

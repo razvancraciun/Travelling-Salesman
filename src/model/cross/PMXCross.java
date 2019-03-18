@@ -3,7 +3,7 @@ package model.cross;
 import model.entities.Individual;
 import model.entities.Pair;
 
-public class PMX implements Cross{
+public class PMXCross implements Cross{
 
 	//TODO: DOC
 	@Override
@@ -66,4 +66,7 @@ public class PMX implements Cross{
 		return new Pair(child1,child2);
 	}
 
+	public String toString() {
+		return "PMX Cross";
+	}
 }

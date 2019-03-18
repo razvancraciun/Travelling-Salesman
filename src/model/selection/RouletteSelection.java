@@ -3,7 +3,7 @@ package model.selection;
 import model.entities.Individual;
 import model.entities.Population;
 
-public class Roulette implements Selection {
+public class RouletteSelection implements Selection {
 
 	//TODO DOC
 	@Override
@@ -50,4 +50,8 @@ public class Roulette implements Selection {
 		throw new IllegalArgumentException("Relative fitnesses do not add up to 1");
 	}
 
+	@Override
+	public String toString() {
+		return "Roulette Selection";
+	}
 }
