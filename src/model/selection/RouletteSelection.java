@@ -8,7 +8,7 @@ public class RouletteSelection implements Selection {
 	//TODO DOC
 	@Override
 	public Population apply(Population source) {
-		Population result=new Population(source.length());
+		Population result=new Population(source);
 		
 		double[] relativeFitness=new double[source.length()];
 		int max=source.getMaximumFitness();

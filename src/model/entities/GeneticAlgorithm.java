@@ -1,17 +1,26 @@
 package model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import model.cross.Cross;
+import model.misc.AlgorithmObserver;
+import model.misc.PopulationObserver;
 import model.mutation.Mutation;
 import model.selection.Selection;
 
-public class GeneticAlgorithm {
-	public Population _population;
-	public Mutation _mutation;
-	public Selection _selection;
-	public Cross _cross;
-	public double _crossChance;
-	public double _mutationChance;
-	public double _elitism;
+public class GeneticAlgorithm implements PopulationObserver {
+	private Population _population;
+	private Mutation _mutation;
+	private Selection _selection;
+	private Cross _cross;
+	private double _crossChance;
+	private double _mutationChance;
+	private double _elitism;
+	private List<AlgorithmObserver> _observers;
+	
+	private int _bestDistance;
+	private Individual _bestRoute;
 	
 	
 	/** Initializes the genetic algorithm parameters 
@@ -25,7 +34,9 @@ public class GeneticAlgorithm {
 	 * */
 	public GeneticAlgorithm(Population population, Mutation mutation,Selection selection, Cross cross, 
 			double crossChance, double mutationChance, double elitism) {
+		_observers=new ArrayList<AlgorithmObserver>();
 		_population=population;
+		_population.add(this);
 		_selection=selection;
 		_mutation=mutation;
 		_cross=cross;
@@ -48,6 +59,10 @@ public class GeneticAlgorithm {
 		_population.evaluate();
 	}
 	
+	public void addObserver(AlgorithmObserver o) {
+		_observers.add(o);
+	}
+	
 	public String toString() {
 		return _population.toString();
 	}
@@ -60,6 +75,57 @@ public class GeneticAlgorithm {
 	}
 	public Cross getCross() {
 		return _cross;
+	}
+
+	public int getPopulationSize() {
+		return _population.length();
+	}
+
+	@Override
+	public void onNewBest(int bestValue, Individual best) {
+		System.out.println("best changed:alg");
+		_bestDistance=bestValue;
+		_bestRoute=best;
+		for(AlgorithmObserver o : _observers) {
+			o.onNewBest(_bestDistance, _bestRoute);
+		}
+		
+	}
+
+	public void setPopulation(Population population) {
+		_population=population;
+		_population.add(this);
+		_bestDistance=Integer.MAX_VALUE;
+		_bestRoute=null;
+	}
+
+	public void setCrossChance(double value) {
+		_crossChance=value;
+	}
+
+	public void setMutationChance(double value) {
+		_mutationChance=value;
+		
+	}
+
+	public void setElitism(double value) {
+		_elitism=value;
+		
+	}
+
+	public void setSelection(Selection selection) {
+		_selection=selection;
+		
+	}
+
+	public void setCross(Cross cross) {
+		_cross=cross;
+		
+	}
+
+	public void setMutation(Mutation mutation) {
+		_mutation=mutation;
+		
 	}
 	
 	

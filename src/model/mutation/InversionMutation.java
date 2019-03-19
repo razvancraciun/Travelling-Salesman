@@ -4,6 +4,7 @@ import model.entities.Individual;
 
 public class InversionMutation implements Mutation{
 
+	
 	@Override
 	public Individual apply(Individual origin) {
 		Individual result = new Individual(origin);

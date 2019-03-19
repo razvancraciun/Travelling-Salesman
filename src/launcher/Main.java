@@ -1,7 +1,6 @@
 package launcher;
 
 import controller.Controller;
-import model.Distances;
 import model.cross.Cross;
 import model.cross.NoCross;
 import model.cross.PMXCross;
@@ -9,6 +8,7 @@ import model.entities.Elite;
 import model.entities.GeneticAlgorithm;
 import model.entities.Individual;
 import model.entities.Population;
+import model.misc.Distances;
 import model.mutation.ExchangeMutation;
 import model.mutation.InversionMutation;
 import model.mutation.Mutation;
@@ -20,28 +20,22 @@ import view.MainWindow;
 
 public class Main {
 
+	private static Controller _ctrl;
 	
 	
-	public void init() {
-		
+	public static void init() {
+		//Default values
+		Population population= new Population(100);
+		GeneticAlgorithm alg = new GeneticAlgorithm(
+				new Population(100),new InversionMutation(), new RouletteSelection(),
+				new PMXCross(), 0.6,0.05,0.0);
+		_ctrl=new Controller(alg);
 	}
 	
 	public static void main(String[] args) {
-		
-		/*Population population=new Population(100);
-		Mutation mutation= new ExchangeMutation();
-		Selection selection= new RouletteSelection();
-		Cross cross=new PMX();
-		double crossChance=0.6;
-		double mutationChance=0.05;
-		double elitism=0.00;
-		GeneticAlgorithm ga= new GeneticAlgorithm(population, mutation,selection,cross,crossChance,mutationChance,elitism);
-		Controller ctrl=new Controller(ga);
-		ctrl.run(100);  */
-		
-		MainWindow app = new MainWindow();
-		app.setSize(400,400);
+		init();
+		MainWindow app=new MainWindow(_ctrl);
+		app.setSize(600,600);
 		app.setVisible(true);
-
 	}
 }

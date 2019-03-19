@@ -1,16 +1,22 @@
 package model.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
-import model.Distances;
 import model.cross.Cross;
+import model.misc.Distances;
+import model.misc.PopulationObserver;
 import model.mutation.Mutation;
 
 public class Population {
 	private Individual[] _population;
 	private int _bestFitness;
 	private int _bestFitnessThisGeneration;
+	
+	private List<PopulationObserver> _observers;
+	
 	
 	/**
 	 * Constructor: fills in the population array and sets fitness values to MAX (since we want to minimize them)
@@ -24,6 +30,8 @@ public class Population {
 		for(int i=0;i<_population.length;i++) {
 			_population[i]=new Individual(Distances.getInstance().length());
 		}
+		
+		_observers=new ArrayList<PopulationObserver>();
 	}
 	
 	/**Copy constructor */
@@ -34,9 +42,11 @@ public class Population {
 		for(int i=0;i<_population.length;i++) {
 			_population[i]=new Individual(other.getIndividual(i));
 		}
+		_observers=other.getObservers();
 	}
 	
 	
+
 	/** Calls the evaluate() method of each individual, thus updating their fitness 
 	 *  Also updates the _bestFitness and _bestFitnessThisGeneration fields if there is the case
 	 */
@@ -49,6 +59,10 @@ public class Population {
 				_bestFitnessThisGeneration=fitness;
 				if(fitness<_bestFitness) {
 					_bestFitness=fitness;
+					//System.out.println("best changed:population");
+					for(PopulationObserver o : _observers) {
+						o.onNewBest(_bestFitness, _population[i]);
+					}
 				}
 			}		
 		}
@@ -79,6 +93,7 @@ public class Population {
 	}
 	
 	
+	
 	//TODO DOC
 	public void mutate(Mutation mutation,double chance) {
 		for(int i=0;i<_population.length;i++) {
@@ -102,6 +117,10 @@ public class Population {
 				else return 1;
 			}
 		});
+	}
+	
+	public void add(PopulationObserver o) {
+		_observers.add(o);
 	}
 
 	public String toString() {
@@ -140,5 +159,9 @@ public class Population {
 	
 	public void setIndividual(int index,Individual ind) {
 		_population[index]=ind;
+	}
+
+	private List<PopulationObserver> getObservers() {
+		return _observers;
 	}
 }

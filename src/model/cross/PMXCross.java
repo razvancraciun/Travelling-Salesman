@@ -6,6 +6,7 @@ import model.entities.Pair;
 public class PMXCross implements Cross{
 
 	//TODO: DOC
+	//TODO BUGGY
 	@Override
 	public Pair apply(Individual parent1, Individual parent2) {
 		

@@ -3,7 +3,7 @@ package model.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Distances;
+import model.misc.Distances;
 
 public class Individual  {
 	
