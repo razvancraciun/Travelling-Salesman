@@ -14,6 +14,7 @@ public class Population {
 	private Individual[] _population;
 	private int _bestFitness;
 	private int _bestFitnessThisGeneration;
+	private int _averageFitnessThisGeneration;
 	
 	private List<PopulationObserver> _observers;
 	
@@ -52,9 +53,11 @@ public class Population {
 	 */
 	public void evaluate() {
 		_bestFitnessThisGeneration=Integer.MAX_VALUE;
+		int sum=0;
 		for(int i=0;i<_population.length;i++) {
 			_population[i].evaluate();
 			int fitness=_population[i].getFitness();
+			sum+=fitness;
 			if(fitness<_bestFitnessThisGeneration) {
 				_bestFitnessThisGeneration=fitness;
 				if(fitness<_bestFitness) {
@@ -66,6 +69,7 @@ public class Population {
 				}
 			}		
 		}
+		_averageFitnessThisGeneration=sum/_population.length;
 	}
 	
 	/**
@@ -163,5 +167,9 @@ public class Population {
 
 	private List<PopulationObserver> getObservers() {
 		return _observers;
+	}
+	
+	public int getAverageFitnessThisGeneration() {
+		return _averageFitnessThisGeneration;
 	}
 }

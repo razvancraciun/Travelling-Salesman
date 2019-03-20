@@ -117,8 +117,10 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		JLabel bestRouteLabel=new JLabel("Best route:");
 		_bestRoute=new JTextArea("N/A");
 		_bestRoute.setEditable(false);
+		//_bestRoute.setSize(this.getWidth(), _bestRoute.getHeight());
 		add(bestRouteLabel);
-		add(_bestRoute);
+		//add(_bestRoute);
+		
 		
 		_start=new JButton("Start");
 		add(_start);
@@ -200,7 +202,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 
 
 	@Override
-	public void onNewGeneration(int best, int bestThisGeneration, int averageThisGeneration) {
+	public void onNewGeneration(int generation,int best, int bestThisGeneration, int averageThisGeneration) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -210,6 +212,20 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 	public void onNewBest(int bestValue, Individual best) {
 		_bestDistance.setText(""+bestValue);
 		_bestRoute.setText(best.toString());
+		
+	}
+
+
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onEnd() {
+		// TODO Auto-generated method stub
 		
 	}
 }

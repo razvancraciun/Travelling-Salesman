@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.FlowLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,11 +22,12 @@ public class MainWindow extends JFrame {
 	}
 
 	private void initGUI() {
-		_mainPanel=new JPanel();
+		_mainPanel=new JPanel(new FlowLayout());
 		_controlPanel=new ControlPanel(_ctrl);
 		_plot=new Plot();
 		
 		_ctrl.getAlgorithm().addObserver(_controlPanel);
+		_ctrl.getAlgorithm().addObserver(_plot);
 		setContentPane(_mainPanel);
 		
 		_mainPanel.add(_controlPanel);

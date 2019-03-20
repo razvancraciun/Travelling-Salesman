@@ -27,7 +27,7 @@ public class Main {
 		//Default values
 		Population population= new Population(100);
 		GeneticAlgorithm alg = new GeneticAlgorithm(
-				new Population(100),new InversionMutation(), new RouletteSelection(),
+				100,new InversionMutation(), new RouletteSelection(),
 				new PMXCross(), 0.6,0.05,0.0);
 		_ctrl=new Controller(alg);
 	}
@@ -35,7 +35,7 @@ public class Main {
 	public static void main(String[] args) {
 		init();
 		MainWindow app=new MainWindow(_ctrl);
-		app.setSize(600,600);
+		app.setSize(1000,500);
 		app.setVisible(true);
 	}
 }

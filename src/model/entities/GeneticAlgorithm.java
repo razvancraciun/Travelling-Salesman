@@ -11,6 +11,7 @@ import model.selection.Selection;
 
 public class GeneticAlgorithm implements PopulationObserver {
 	private Population _population;
+	private int _populationSize;
 	private Mutation _mutation;
 	private Selection _selection;
 	private Cross _cross;
@@ -32,20 +33,16 @@ public class GeneticAlgorithm implements PopulationObserver {
 	 * @mutationChance: the chance for a mutation to occur
 	 * @elitism : coefficient of the population size that will be considered elites
 	 * */
-	public GeneticAlgorithm(Population population, Mutation mutation,Selection selection, Cross cross, 
+	public GeneticAlgorithm(int populationSize, Mutation mutation,Selection selection, Cross cross, 
 			double crossChance, double mutationChance, double elitism) {
 		_observers=new ArrayList<AlgorithmObserver>();
-		_population=population;
-		_population.add(this);
+		_populationSize=populationSize;
 		_selection=selection;
 		_mutation=mutation;
 		_cross=cross;
 		_crossChance=crossChance;
 		_mutationChance=mutationChance;
 		_elitism=elitism;
-		
-		//first evaluation
-		_population.evaluate();
 		
 	}
 	
@@ -78,12 +75,34 @@ public class GeneticAlgorithm implements PopulationObserver {
 	}
 
 	public int getPopulationSize() {
-		return _population.length();
+		return _populationSize;
+	}
+	
+	public void run(int generations) {
+		_bestDistance=Integer.MAX_VALUE;
+		_bestRoute=null;
+		_population=new Population(_populationSize);
+		_population.add(this);
+		//first evaluation
+		_population.evaluate();
+		for(AlgorithmObserver o : _observers) {
+			o.onStart();
+		}
+		for(int i=0;i<generations;i++) {
+			nextGeneration();
+			for(AlgorithmObserver o : _observers) {
+				o.onNewGeneration(i, _population.getBestFitness(),
+						_population.getBestFitnessThisGeneration(),_population.getAverageFitnessThisGeneration());
+			}
+		}
+		for(AlgorithmObserver o : _observers) {
+			o.onEnd();
+		}
 	}
 
 	@Override
 	public void onNewBest(int bestValue, Individual best) {
-		System.out.println("best changed:alg");
+		///System.out.println("best changed:alg");
 		_bestDistance=bestValue;
 		_bestRoute=best;
 		for(AlgorithmObserver o : _observers) {
@@ -92,11 +111,8 @@ public class GeneticAlgorithm implements PopulationObserver {
 		
 	}
 
-	public void setPopulation(Population population) {
-		_population=population;
-		_population.add(this);
-		_bestDistance=Integer.MAX_VALUE;
-		_bestRoute=null;
+	public void setPopulationSize(int size) {
+		_populationSize=size;
 	}
 
 	public void setCrossChance(double value) {

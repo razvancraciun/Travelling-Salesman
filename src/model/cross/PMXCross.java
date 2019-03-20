@@ -7,6 +7,7 @@ public class PMXCross implements Cross{
 
 	//TODO: DOC
 	//TODO BUGGY
+	//test if also the second chice is in the array
 	@Override
 	public Pair apply(Individual parent1, Individual parent2) {
 		

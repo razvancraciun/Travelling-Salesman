@@ -19,10 +19,7 @@ public class Controller {
 	
 	//TODO DOC
 	public void run(int generations) {
-		for(int i=0;i<generations;i++) {
-			_alg.nextGeneration();
-			//System.out.println(_alg);
-		}
+		_alg.run(generations);
 	}
 
 	//GETTERS AND SETTERS
@@ -37,7 +34,7 @@ public class Controller {
 
 
 	public void setPopulationSize(int value) {
-		_alg.setPopulation(new Population(value));
+		_alg.setPopulationSize(value);
 		
 	}
 
