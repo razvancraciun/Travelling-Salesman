@@ -23,10 +23,56 @@ public class OXCross implements Cross{
 		Individual child1=new Individual(parent2);		//Switching
 		Individual child2=new Individual(parent1);
 		
-		//clearValuesBetweenPoints
+		resetOutsidePoints(child1);
+		resetOutsidePoints(child2);
+		
+		int parentIndex1=_point2;
+		int parentIndex2=_point2;
+		for(int i=_point2;i<child1.length();i++) {
+			while(child1.hasGene(_parent1.getGene(parentIndex1%_parent1.length()))) {
+				parentIndex1++;
+			}
+			child1.setGene(i, _parent1.getGene(parentIndex1%_parent1.length()));
+			
+			while(child2.hasGene(_parent2.getGene(parentIndex2%_parent2.length()))) {
+				parentIndex2++;
+			}
+			child2.setGene(i, _parent2.getGene(parentIndex2%_parent2.length()));
+		}
+		for(int i=0;i<_point1;i++) {
+			while(child1.hasGene(_parent1.getGene(parentIndex1%_parent1.length()))) {
+				parentIndex1++;
+			}
+			child1.setGene(i, _parent1.getGene(parentIndex1%_parent1.length()));
+			
+			while(child2.hasGene(_parent2.getGene(parentIndex2%_parent2.length()))) {
+				parentIndex2++;
+			}
+			child2.setGene(i, _parent2.getGene(parentIndex2%_parent2.length()));
+		}
+		
+		if(child1.valid()&& child2.valid()) {
+			System.out.println("YAy");
+		}
+		else throw new IllegalArgumentException("BUGGY");
 		
 		
-		return null;
+		return new Pair(child1,child2);
+	}
+	
+	public void resetOutsidePoints(Individual ind) {
+		for(int i=0;i<_point1;i++) {
+			ind.setGene(i, -1);
+		} 
+		for(int i=_point2;i<ind.length();i++) {
+			ind.setGene(i, -1);
+		}
+	}
+	
+	
+	
+	public String toString() {
+		return "OX Cross";
 	}
 
 }

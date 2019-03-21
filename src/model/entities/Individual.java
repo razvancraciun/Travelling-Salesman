@@ -114,5 +114,13 @@ public class Individual  {
 		}
 		throw new IllegalArgumentException("Gene not found");
 	}
-
+	
+	public boolean hasValue(int value) {
+		for(int i=0;i<_genes.length;i++) {
+			if(_genes[i]==value) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

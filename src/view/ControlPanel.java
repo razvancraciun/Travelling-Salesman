@@ -19,6 +19,7 @@ import javax.swing.event.ChangeListener;
 import controller.Controller;
 import model.cross.Cross;
 import model.cross.NoCross;
+import model.cross.OXCross;
 import model.cross.PMXCross;
 import model.entities.Individual;
 import model.misc.AlgorithmObserver;
@@ -84,7 +85,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(crossChanceLabel);
 		add(_crossChance);
 		
-		Cross[] crosses = {new PMXCross(), new NoCross() };
+		Cross[] crosses = {new PMXCross(),new OXCross(), new NoCross() };
 		JLabel crossLabel= new JLabel("Cross:");
 		_cross=new JComboBox<Cross>(crosses);
 		add(crossLabel);
