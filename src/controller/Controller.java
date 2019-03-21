@@ -2,7 +2,6 @@ package controller;
 
 import model.cross.Cross;
 import model.entities.GeneticAlgorithm;
-import model.entities.Population;
 import model.mutation.Mutation;
 import model.selection.Selection;
 
@@ -20,6 +19,7 @@ public class Controller {
 	//TODO DOC
 	public void run(int generations) {
 		_alg.run(generations);
+		//System.out.println(_alg);
 	}
 
 	//GETTERS AND SETTERS

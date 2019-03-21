@@ -52,6 +52,6 @@ public class RouletteSelection implements Selection {
 
 	@Override
 	public String toString() {
-		return "Roulette Selection";
+		return "Roulette";
 	}
 }

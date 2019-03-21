@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.Component;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,14 +8,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -23,27 +20,28 @@ import controller.Controller;
 import model.cross.Cross;
 import model.cross.NoCross;
 import model.cross.PMXCross;
-import model.entities.GeneticAlgorithm;
 import model.entities.Individual;
-import model.entities.Population;
 import model.misc.AlgorithmObserver;
 import model.mutation.ExchangeMutation;
 import model.mutation.InversionMutation;
 import model.mutation.Mutation;
 import model.mutation.NoMutation;
+import model.selection.DeterministicTournamentSelection;
 import model.selection.NoSelection;
 import model.selection.RouletteSelection;
 import model.selection.Selection;
+import model.selection.TruncationSelection;
 
 public class ControlPanel extends JPanel implements AlgorithmObserver {
-	
+
+	private static final long serialVersionUID = -6602021732684959357L;
 	private JSpinner _noGenerations;
 	private JSpinner _populationSize;
 	private JSpinner _crossChance;
-	private JComboBox _selection;
-	private JComboBox _cross;
+	private JComboBox<Selection> _selection;
+	private JComboBox<Cross> _cross;
 	private JSpinner _mutationChance;
-	private JComboBox _mutation;
+	private JComboBox<Mutation> _mutation;
 	private JSpinner _elitism;
 	private JButton _start;
 	
@@ -68,10 +66,10 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(populationLabel);
 		add(_populationSize);
 		
-		//add(new JSeparator(SwingConstants.HORIZONTAL));
-		Selection[] selections = {new NoSelection(),new RouletteSelection()} ;
+		Selection[] selections = {new NoSelection(),new RouletteSelection(),new TruncationSelection(),
+				new DeterministicTournamentSelection()} ;
 		JLabel selectionLabel=new JLabel("Selection:");
-		_selection=new JComboBox(selections);
+		_selection=new JComboBox<Selection>(selections);
 		for(Selection s : selections) {
 			if(s.toString().equals(_ctrl.getAlgorithm().getSelection().toString())) {
 				_selection.setSelectedItem(s);
@@ -88,7 +86,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		
 		Cross[] crosses = {new PMXCross(), new NoCross() };
 		JLabel crossLabel= new JLabel("Cross:");
-		_cross=new JComboBox(crosses);
+		_cross=new JComboBox<Cross>(crosses);
 		add(crossLabel);
 		add(_cross);
 		
@@ -99,7 +97,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 
 		JLabel mutationLabel=new JLabel("Mutation:");
 		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation(), new NoMutation() } ;
-		_mutation=new JComboBox(mutations);
+		_mutation=new JComboBox<Mutation>(mutations);
 		add(mutationLabel);
 		add(_mutation);
 		
@@ -115,11 +113,11 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(_bestDistance);	
 		
 		JLabel bestRouteLabel=new JLabel("Best route:");
-		_bestRoute=new JTextArea("N/A");
+		_bestRoute=new JTextArea(5,10);
+		_bestRoute.setLineWrap(true);
 		_bestRoute.setEditable(false);
-		//_bestRoute.setSize(this.getWidth(), _bestRoute.getHeight());
 		add(bestRouteLabel);
-		//add(_bestRoute);
+		add(_bestRoute);
 		
 		
 		_start=new JButton("Start");
@@ -203,8 +201,6 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 
 	@Override
 	public void onNewGeneration(int generation,int best, int bestThisGeneration, int averageThisGeneration) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
@@ -218,14 +214,26 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
-		
+		_noGenerations.setEnabled(false);
+		_populationSize.setEnabled(false);
+		_selection.setEnabled(false);
+		_mutation.setEnabled(false);
+		_cross.setEnabled(false);
+		_crossChance.setEnabled(false);
+		_mutationChance.setEnabled(false);
+		_elitism.setEnabled(false);
 	}
 
 
 	@Override
 	public void onEnd() {
-		// TODO Auto-generated method stub
-		
+		_noGenerations.setEnabled(true);
+		_populationSize.setEnabled(true);
+		_selection.setEnabled(true);
+		_mutation.setEnabled(true);
+		_cross.setEnabled(true);
+		_crossChance.setEnabled(true);
+		_mutationChance.setEnabled(true);
+		_elitism.setEnabled(true);
 	}
 }

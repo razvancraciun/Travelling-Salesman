@@ -172,4 +172,13 @@ public class Population {
 	public int getAverageFitnessThisGeneration() {
 		return _averageFitnessThisGeneration;
 	}
+	
+	public Pair getRandomPair() {
+		int i1=(int)(Math.random()*_population.length);
+		int i2=(int)(Math.random()*_population.length);
+		while(i2==i1) {
+			i2=(int)(Math.random()*_population.length);
+		}
+		return new Pair(new Individual(_population[i1]),new Individual(_population[i2]));
+	}
 }

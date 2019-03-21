@@ -1,12 +1,12 @@
 package view;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
@@ -15,6 +15,7 @@ import model.misc.AlgorithmObserver;
 
 public class Plot extends JPanel implements AlgorithmObserver{
 
+	private static final long serialVersionUID = -5432146133350790070L;
 	private JFreeChart _chart;
 	private ChartPanel _chartPanel;
 	private XYSeriesCollection _dataset;
@@ -23,6 +24,7 @@ public class Plot extends JPanel implements AlgorithmObserver{
 	private XYSeries _generationAverage;
 	
 	public Plot() {
+		setLayout(new BorderLayout());
 		_dataset = new XYSeriesCollection();
 		_best=new XYSeries("Best");
 		_generationBest=new XYSeries("Generation best");
@@ -31,11 +33,11 @@ public class Plot extends JPanel implements AlgorithmObserver{
 		_dataset.addSeries(_generationBest);
 		_dataset.addSeries(_generationAverage);
 		 _chart = ChartFactory.createXYLineChart(
-		        "Title", 
-		        "xlabel", 
-		        "ylabel", _dataset);
+		        "Travelling Salesman", 
+		        "Generations", 
+		        "Distance", _dataset);
 		_chartPanel = new ChartPanel(_chart);
-		add(_chartPanel);
+		add(_chartPanel,BorderLayout.CENTER);
 	}
 
 	@Override

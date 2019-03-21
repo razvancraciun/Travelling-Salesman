@@ -10,8 +10,8 @@ public class Individual  {
 	private int[] _genes;
 	private int _fitness;
 	
-	/**Constructor: generates an array that starts with 0, following with a random permutation of 
-	 * the numbers (1..size-1)
+	/**Constructor: generates an array  with a random permutation of 
+	 * the numbers (0..size-1)
 	 * @size: the size of the gene array to be constructed
 	 */
 	public Individual(int size) {
@@ -20,12 +20,10 @@ public class Individual  {
 		}
 		_genes=new int[size];
 		List<Integer> helper=new ArrayList<Integer>();
-		for(int i=1;i<_genes.length;i++) {
+		for(int i=0;i<_genes.length;i++) {
 			helper.add(i);
 		}
-		
-		_genes[0]=0;
-		for(int i=1;i<_genes.length;i++) {
+		for(int i=0;i<_genes.length;i++) {
 			_genes[i]=getRandomNumber(helper);
 		}
 	}
@@ -47,7 +45,7 @@ public class Individual  {
 		for(int i=1;i<_genes.length;i++) {
 			result+=dist.getDistance(_genes[i], _genes[i-1]);
 		}
-		result+=dist.getDistance(_genes.length-1, 0);
+		result+=dist.getDistance(_genes.length-1, _genes[0]);
 		_fitness=result;
 	}
 	
@@ -66,7 +64,7 @@ public class Individual  {
 	 */
 	public boolean valid() {
 		int sum=0;
-		for(int i=0;i<_genes[i];i++) {
+		for(int i=0;i<_genes.length;i++) {
 			sum+=i;
 			sum-=_genes[i];
 		}
@@ -85,6 +83,9 @@ public class Individual  {
 	
 	//GETTERS AND SETTERS
 	public int getGene(int index) {
+		if(index<0|| index>=_genes.length) {
+			throw new IndexOutOfBoundsException(" gene index not in array: "+ index);
+		}
 		return _genes[index];
 	}
 	public void setGene(int index, int value) {
