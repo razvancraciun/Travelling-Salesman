@@ -51,12 +51,6 @@ public class OXCross implements Cross{
 			child2.setGene(i, _parent2.getGene(parentIndex2%_parent2.length()));
 		}
 		
-		if(child1.valid()&& child2.valid()) {
-			System.out.println("YAy");
-		}
-		else throw new IllegalArgumentException("BUGGY");
-		
-		
 		return new Pair(child1,child2);
 	}
 	
@@ -72,7 +66,7 @@ public class OXCross implements Cross{
 	
 	
 	public String toString() {
-		return "OX Cross";
+		return "Order";
 	}
 
 }

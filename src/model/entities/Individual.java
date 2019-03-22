@@ -7,7 +7,7 @@ import model.misc.Distances;
 
 public class Individual  {
 	
-	private int[] _genes;
+	private List<Integer> _genes;
 	private int _fitness;
 	
 	/**Constructor: generates an array  with a random permutation of 
@@ -18,21 +18,22 @@ public class Individual  {
 		if(size<1) {
 			throw new IllegalArgumentException("Individual size must be at least 1");
 		}
-		_genes=new int[size];
+		_genes=new ArrayList<Integer>(size);
 		List<Integer> helper=new ArrayList<Integer>();
-		for(int i=0;i<_genes.length;i++) {
+		for(int i=0;i<size;i++) {
 			helper.add(i);
 		}
-		for(int i=0;i<_genes.length;i++) {
-			_genes[i]=getRandomNumber(helper);
+		
+		for(int i=0;i<size;i++) {
+			_genes.add(getRandomNumber(helper));
 		}
 	}
 	
 	/** Copy constructor */
 	public Individual(Individual other) {
-		_genes=new int[other.length()];
-		for(int i=0;i<_genes.length;i++) {
-			_genes[i]=other.getGene(i);
+		_genes=new ArrayList<Integer>(other.length());
+		for(int i=0;i<other.length();i++) {
+			_genes.add(other.getGene(i));
 		}
 		_fitness=other.getFitness();
 	}
@@ -42,10 +43,10 @@ public class Individual  {
 	public void evaluate() {
 		Distances dist=Distances.getInstance();
 		int result=0;
-		for(int i=1;i<_genes.length;i++) {
-			result+=dist.getDistance(_genes[i], _genes[i-1]);
+		for(int i=1;i<_genes.size();i++) {
+			result+=dist.getDistance(_genes.get(i), _genes.get(i-1));
 		}
-		result+=dist.getDistance(_genes.length-1, _genes[0]);
+		result+=dist.getDistance(_genes.size()-1, _genes.get(0));
 		_fitness=result;
 	}
 	
@@ -64,17 +65,17 @@ public class Individual  {
 	 */
 	public boolean valid() {
 		int sum=0;
-		for(int i=0;i<_genes.length;i++) {
+		for(int i=0;i<_genes.size();i++) {
 			sum+=i;
-			sum-=_genes[i];
+			sum-=_genes.get(i);
 		}
 		return sum==0;
 	}
 	
 	public String toString() {
 		String result="";
-		for(int i=0;i<_genes.length;i++) {
-			result+=_genes[i]+"-";
+		for(int i=0;i<_genes.size();i++) {
+			result+=_genes.get(i)+"-";
 		}
 		result+=">"+_fitness;
 		return result;
@@ -83,16 +84,16 @@ public class Individual  {
 	
 	//GETTERS AND SETTERS
 	public int getGene(int index) {
-		if(index<0|| index>=_genes.length) {
+		if(index<0|| index>=_genes.size()) {
 			throw new IndexOutOfBoundsException(" gene index not in array: "+ index);
 		}
-		return _genes[index];
+		return _genes.get(index);
 	}
 	public void setGene(int index, int value) {
-		_genes[index]=value;
+		_genes.set(index,value);
 	}
 	public int length() {
-		return _genes.length;
+		return _genes.size();
 	}
 	public int getFitness() {
 		return _fitness;
@@ -100,24 +101,24 @@ public class Individual  {
 	
 	/** Checks if the _genes array contains a particular value */
 	public boolean hasGene(int value) {
-		for(int i=0;i<_genes.length;i++) {
-			if(_genes[i]==value)
+		for(int i=0;i<_genes.size();i++) {
+			if(_genes.get(i)==value)
 				return true;
 		}
 		return false;
 	}
 
 	public int getGeneIndex(int value) {
-		for(int i=0;i<_genes.length;i++) {
-			if(_genes[i]==value)
+		for(int i=0;i<_genes.size();i++) {
+			if(_genes.get(i)==value)
 				return i;
 		}
 		throw new IllegalArgumentException("Gene not found");
 	}
 	
 	public boolean hasValue(int value) {
-		for(int i=0;i<_genes.length;i++) {
-			if(_genes[i]==value) {
+		for(int i=0;i<_genes.size();i++) {
+			if(_genes.get(i)==value) {
 				return true;
 			}
 		}

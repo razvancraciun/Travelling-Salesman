@@ -85,8 +85,8 @@ public class Population {
 				chosen++;
 				if(chosen%2==0) {
 					Pair pair=cross.apply(_population[previous], _population[i]);
-					_population[previous]=pair.getFirst();
-					_population[i]=pair.getSecond();
+					_population[previous]=new Individual(pair.getFirst());
+					_population[i]=new Individual(pair.getSecond());
 					
 				}
 				else {

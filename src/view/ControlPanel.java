@@ -18,7 +18,7 @@ import javax.swing.event.ChangeListener;
 
 import controller.Controller;
 import model.cross.Cross;
-import model.cross.NoCross;
+import model.cross.CycleCross;
 import model.cross.OXCross;
 import model.cross.PMXCross;
 import model.entities.Individual;
@@ -26,9 +26,9 @@ import model.misc.AlgorithmObserver;
 import model.mutation.ExchangeMutation;
 import model.mutation.InversionMutation;
 import model.mutation.Mutation;
-import model.mutation.NoMutation;
 import model.selection.DeterministicTournamentSelection;
 import model.selection.NoSelection;
+import model.selection.ProbabilisticTournamentSelection;
 import model.selection.RouletteSelection;
 import model.selection.Selection;
 import model.selection.TruncationSelection;
@@ -68,7 +68,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(_populationSize);
 		
 		Selection[] selections = {new NoSelection(),new RouletteSelection(),new TruncationSelection(),
-				new DeterministicTournamentSelection()} ;
+				new DeterministicTournamentSelection(), new ProbabilisticTournamentSelection()} ;
 		JLabel selectionLabel=new JLabel("Selection:");
 		_selection=new JComboBox<Selection>(selections);
 		for(Selection s : selections) {
@@ -85,7 +85,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(crossChanceLabel);
 		add(_crossChance);
 		
-		Cross[] crosses = {new PMXCross(),new OXCross(), new NoCross() };
+		Cross[] crosses = {new PMXCross(),new OXCross(), new CycleCross() };
 		JLabel crossLabel= new JLabel("Cross:");
 		_cross=new JComboBox<Cross>(crosses);
 		add(crossLabel);
@@ -97,7 +97,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(_mutationChance);
 
 		JLabel mutationLabel=new JLabel("Mutation:");
-		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation(), new NoMutation() } ;
+		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation() } ;
 		_mutation=new JComboBox<Mutation>(mutations);
 		add(mutationLabel);
 		add(_mutation);

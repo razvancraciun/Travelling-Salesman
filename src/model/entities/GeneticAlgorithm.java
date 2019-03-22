@@ -54,6 +54,7 @@ public class GeneticAlgorithm implements PopulationObserver {
 		_population.mutate(_mutation,_mutationChance);
 		elite.replaceWorst(_population);
 		_population.evaluate();
+		//System.out.println(_population);
 	}
 	
 	public void addObserver(AlgorithmObserver o) {

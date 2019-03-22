@@ -81,6 +81,6 @@ public class PMXCross implements Cross{
 	}
 	
 	public String toString() {
-		return "PMX Cross";
+		return "Partial Matching";
 	}
 }

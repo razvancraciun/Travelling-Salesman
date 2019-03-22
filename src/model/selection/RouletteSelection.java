@@ -11,18 +11,14 @@ public class RouletteSelection implements Selection {
 		Population result=new Population(source);
 		
 		double[] relativeFitness=new double[source.length()];
-		int max=source.getMaximumFitness();
-		int sum=0;
+		double sum=0.0;
+		
+		
 		
 		//Calculating relative fitness values
 		for(int i=0;i<source.length();i++) {
-			relativeFitness[i]=max-source.getIndividual(i).getFitness();
+			relativeFitness[i]=1.0/source.getIndividual(i).getFitness();
 			sum+=relativeFitness[i];
-		}
-		
-		//if all the values are equal there is no point in the selection
-		if(sum==0) {
-			return source;
 		}
 		
 		//Clamps values between 0 and 1
@@ -32,7 +28,7 @@ public class RouletteSelection implements Selection {
 		
 		//filling in the resulting population
 		for(int i=0;i<result.length();i++) {
-			result.setIndividual(i,new Individual(pickOne(source,relativeFitness)));
+			result.setIndividual(i,pickOne(source,relativeFitness));
 		}
 		return result;
 	}
@@ -44,7 +40,7 @@ public class RouletteSelection implements Selection {
 		for(int i=0;i<source.length();i++) {
 			sum+=relativeFitness[i];
 			if(prob<sum) {
-				return source.getIndividual(i);
+				return new Individual(source.getIndividual(i));
 			}
 		}
 		throw new IllegalArgumentException("Relative fitnesses do not add up to 1");
