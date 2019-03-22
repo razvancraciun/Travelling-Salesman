@@ -3,6 +3,8 @@ package model.selection;
 import model.entities.Individual;
 import model.entities.Population;
 
+
+//BUGGY
 public class TruncationSelection implements Selection{
 	@Override
 	public Population apply(Population source) {

@@ -24,6 +24,7 @@ import model.cross.PMXCross;
 import model.entities.Individual;
 import model.misc.AlgorithmObserver;
 import model.mutation.ExchangeMutation;
+import model.mutation.InsertionMutation;
 import model.mutation.InversionMutation;
 import model.mutation.Mutation;
 import model.selection.DeterministicTournamentSelection;
@@ -97,7 +98,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(_mutationChance);
 
 		JLabel mutationLabel=new JLabel("Mutation:");
-		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation() } ;
+		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation(), new InsertionMutation()} ;
 		_mutation=new JComboBox<Mutation>(mutations);
 		add(mutationLabel);
 		add(_mutation);

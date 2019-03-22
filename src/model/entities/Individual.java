@@ -124,4 +124,11 @@ public class Individual  {
 		}
 		return false;
 	}
+	
+	public void removeAtIndex(int index) {
+		_genes.remove(index);
+	}
+	public void addAtIndex(int index,int value) {
+		_genes.add(index, value);
+	}
 }
