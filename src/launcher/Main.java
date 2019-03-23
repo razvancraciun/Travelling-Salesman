@@ -1,9 +1,9 @@
 package launcher;
 
 import controller.Controller;
-import model.cross.PMXCross;
+import model.cross.CycleCross;
 import model.entities.GeneticAlgorithm;
-import model.mutation.InversionMutation;
+import model.mutation.HeuristicMutation;
 import model.selection.RouletteSelection;
 import view.MainWindow;
 
@@ -15,8 +15,8 @@ public class Main {
 	public static void init() {
 		//Default values
 		GeneticAlgorithm alg = new GeneticAlgorithm(
-				100,new InversionMutation(), new RouletteSelection(),
-				new PMXCross(), 0.6,0.05,0.0);
+				100,new HeuristicMutation(), new RouletteSelection(),
+				new CycleCross(), 0.6,0.05,0.0);
 		_ctrl=new Controller(alg);
 	}
 	

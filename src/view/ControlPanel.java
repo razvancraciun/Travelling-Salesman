@@ -24,6 +24,7 @@ import model.cross.PMXCross;
 import model.entities.Individual;
 import model.misc.AlgorithmObserver;
 import model.mutation.ExchangeMutation;
+import model.mutation.HeuristicMutation;
 import model.mutation.InsertionMutation;
 import model.mutation.InversionMutation;
 import model.mutation.Mutation;
@@ -89,6 +90,11 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		Cross[] crosses = {new PMXCross(),new OXCross(), new CycleCross() };
 		JLabel crossLabel= new JLabel("Cross:");
 		_cross=new JComboBox<Cross>(crosses);
+		for(Cross c : crosses) {
+			if(c.toString().equals(_ctrl.getAlgorithm().getCross().toString())) {
+				_cross.setSelectedItem(c);
+			}
+		}
 		add(crossLabel);
 		add(_cross);
 		
@@ -98,8 +104,13 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(_mutationChance);
 
 		JLabel mutationLabel=new JLabel("Mutation:");
-		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation(), new InsertionMutation()} ;
+		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation(), new InsertionMutation(), new HeuristicMutation()} ;
 		_mutation=new JComboBox<Mutation>(mutations);
+		for(Mutation m : mutations) {
+			if(m.toString().equals(_ctrl.getAlgorithm().getMutation().toString())) {
+				_mutation.setSelectedItem(m);
+			}
+		}
 		add(mutationLabel);
 		add(_mutation);
 		

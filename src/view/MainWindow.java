@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 
 import controller.Controller;
 
@@ -26,6 +27,7 @@ public class MainWindow extends JFrame {
 	}
 
 	private void initGUI() {
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		_mainPanel=new JPanel(new BorderLayout());
 		setContentPane(_mainPanel);
