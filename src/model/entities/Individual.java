@@ -73,11 +73,11 @@ public class Individual  {
 	}
 	
 	public String toString() {
-		String result="";
+		String result="[";
 		for(int i=0;i<_genes.size();i++) {
-			result+=_genes.get(i)+"||";
+			result+=_genes.get(i)+", ";
 		}
-		result+=">"+_fitness;
+		result+="]->"+_fitness;
 		return result;
 	}
 	
