@@ -12,24 +12,24 @@ This repository is still under construction and not yet usable.
 - Selection:
   - ~~Roulette~~ 
   - Truncaction
-  - Deterministic tournament
-  - Probabilistic torunament
+  - ~~Deterministic tournament
+  - ~~Probabilistic torunament
   - Universal stochastic
 - Cross:
   - ~~PMX~~
-  - OX
-  - CX
+  - ~~OX~~
+  - ~~CX~~
   - ERX
-  - Ordinal coding
+  - ~~Ordinal coding~~
   - Variants of OX??
   - Some own method
 - Mutation
   - ~~Inversion~~
   - ~~Exchange~~
-  - Insertion
-  - Heuristics
-  - Some own method
-- Controller
-- View
+  - ~~Insertion~~
+  - ~~Heuristics~~
+  - ~~Some own method~~
+- ~~Controller~~
+- ~~View~~
   - ~~Control Panel~~
-  - Plot
+  - ~~Plot~~
