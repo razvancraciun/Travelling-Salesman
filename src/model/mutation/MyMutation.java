@@ -55,5 +55,9 @@ public class MyMutation implements Mutation {
 		}
 		return cache.get(0);
 	}
+	
+	public String toString() {
+		return "My mutation";
+	}
 
 }

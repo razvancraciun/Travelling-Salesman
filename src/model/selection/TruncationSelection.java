@@ -4,19 +4,17 @@ import model.entities.Individual;
 import model.entities.Population;
 
 
-//BUGGY
+//TODO DOC
 public class TruncationSelection implements Selection{
 	@Override
 	public Population apply(Population source) {
-		System.out.println(source);
-		Population result=new Population(source.length());
+		Population result=new Population(source);
 		source.sort();
 		
 		for(int i=0;i<result.length();i++) {
 			result.setIndividual(i, new Individual(source.getIndividual(i/2)));
 		}
 		shuffle(result);
-		System.out.println(result);
 		return result;
 	}
 	

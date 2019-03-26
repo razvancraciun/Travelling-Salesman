@@ -150,16 +150,7 @@ public class Population {
 	public int getBestFitness() {
 		return _bestFitness;
 	}
-	
-	public int getMaximumFitness() {
-		int max=_population[0].getFitness();
-		for(int i=1;i<_population.length;i++) {
-			if(_population[i].getFitness()>max) {
-				max=_population[i].getFitness();
-			}
-		}
-		return max;
-	}
+
 	
 	public void setIndividual(int index,Individual ind) {
 		_population[index]=ind;

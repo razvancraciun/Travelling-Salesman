@@ -12,12 +12,12 @@ public class RouletteSelection implements Selection {
 		
 		double[] relativeFitness=new double[source.length()];
 		double sum=0.0;
-		
+
 		
 		
 		//Calculating relative fitness values
 		for(int i=0;i<source.length();i++) {
-			relativeFitness[i]=1.0/source.getIndividual(i).getFitness();
+			relativeFitness[i]=10000.0/source.getIndividual(i).getFitness();
 			sum+=relativeFitness[i];
 		}
 		

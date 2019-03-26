@@ -1,11 +1,12 @@
 package launcher;
 
 import controller.Controller;
+import model.cross.ERXCross;
 import model.cross.PMXCross;
 import model.entities.GeneticAlgorithm;
 import model.mutation.HeuristicMutation;
-import model.mutation.MyMutation;
 import model.selection.RouletteSelection;
+import model.selection.TruncationSelection;
 import view.MainWindow;
 
 public class Main {
@@ -16,8 +17,8 @@ public class Main {
 	public static void init() {
 		//Default values
 		GeneticAlgorithm alg = new GeneticAlgorithm(
-				100,new MyMutation(), new RouletteSelection(),
-				new PMXCross(), 0.6,0.05,0.0);
+				100,new HeuristicMutation(), new TruncationSelection(),
+				new ERXCross(), 0.6,0.05,0.0);
 		_ctrl=new Controller(alg);
 		//_ctrl.run(100);
 	}

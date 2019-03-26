@@ -19,6 +19,7 @@ import javax.swing.event.ChangeListener;
 import controller.Controller;
 import model.cross.Cross;
 import model.cross.CycleCross;
+import model.cross.ERXCross;
 import model.cross.OXCross;
 import model.cross.OrdinalCodingCross;
 import model.cross.PMXCross;
@@ -29,6 +30,7 @@ import model.mutation.HeuristicMutation;
 import model.mutation.InsertionMutation;
 import model.mutation.InversionMutation;
 import model.mutation.Mutation;
+import model.mutation.MyMutation;
 import model.selection.DeterministicTournamentSelection;
 import model.selection.NoSelection;
 import model.selection.ProbabilisticTournamentSelection;
@@ -56,6 +58,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 	
 	public ControlPanel(Controller ctrl) {
 		_ctrl=ctrl;
+		_ctrl.getAlgorithm().addObserver(this);
 		
 		
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
@@ -88,7 +91,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(crossChanceLabel);
 		add(_crossChance);
 		
-		Cross[] crosses = {new PMXCross(),new OXCross(), new CycleCross(), new OrdinalCodingCross() };
+		Cross[] crosses = {new PMXCross(),new OXCross(), new CycleCross(), new OrdinalCodingCross(), new ERXCross() };
 		JLabel crossLabel= new JLabel("Cross:");
 		_cross=new JComboBox<Cross>(crosses);
 		for(Cross c : crosses) {
@@ -105,7 +108,8 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(_mutationChance);
 
 		JLabel mutationLabel=new JLabel("Mutation:");
-		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation(), new InsertionMutation(), new HeuristicMutation()} ;
+		Mutation[] mutations = { new InversionMutation(), new ExchangeMutation(), new InsertionMutation(), 
+				new HeuristicMutation(), new MyMutation()} ;
 		_mutation=new JComboBox<Mutation>(mutations);
 		for(Mutation m : mutations) {
 			if(m.toString().equals(_ctrl.getAlgorithm().getMutation().toString())) {
@@ -236,6 +240,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		_crossChance.setEnabled(false);
 		_mutationChance.setEnabled(false);
 		_elitism.setEnabled(false);
+		this.repaint();
 	}
 
 
