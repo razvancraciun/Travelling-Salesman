@@ -20,6 +20,7 @@ import controller.Controller;
 import model.cross.Cross;
 import model.cross.CycleCross;
 import model.cross.ERXCross;
+import model.cross.MyCross;
 import model.cross.OXCross;
 import model.cross.OrdinalCodingCross;
 import model.cross.PMXCross;
@@ -91,7 +92,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(crossChanceLabel);
 		add(_crossChance);
 		
-		Cross[] crosses = {new PMXCross(),new OXCross(), new CycleCross(), new OrdinalCodingCross(), new ERXCross() };
+		Cross[] crosses = {new PMXCross(),new OXCross(), new CycleCross(), new OrdinalCodingCross(), new ERXCross(), new MyCross() };
 		JLabel crossLabel= new JLabel("Cross:");
 		_cross=new JComboBox<Cross>(crosses);
 		for(Cross c : crosses) {

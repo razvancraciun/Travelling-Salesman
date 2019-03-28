@@ -1,9 +1,7 @@
 package model.cross;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import model.entities.Individual;
 import model.entities.Pair;
@@ -68,7 +66,6 @@ public class ERXCross implements Cross{
 			}
 			//else get the neighbour whith the smallest list
 			else {
-				//buggy
 				int chosen=-1;
 				int min=Integer.MAX_VALUE;
 				for(int j=0;j<neighbours.get(i).size();j++) {
