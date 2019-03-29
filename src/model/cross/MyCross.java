@@ -5,7 +5,14 @@ import java.util.Stack;
 import model.entities.Individual;
 import model.entities.Pair;
 import model.misc.GraphNode;
-
+/**
+ * A personal implementation of a crossover operator based on ERX.
+ * Builds a graph where the nodes are the different cities. 
+ * Vertexes are present between the nodes if the nodes are neighbours in the parents.
+ * Children are built doing a Depth First Search starting from two random nodes of the graph.
+ * @author razvan
+ *
+ */
 public class MyCross implements Cross{
 
 	private int _length;
@@ -45,7 +52,11 @@ public class MyCross implements Cross{
 
 
 
-
+	/**
+	 * Builds a child Individual doing a DFS on our graph
+	 * @param graphNode starting node
+	 * @return the resulting child
+	 */
 	private Individual DFS(GraphNode graphNode) {
 		Individual result = new Individual(_length);
 		int index=0;

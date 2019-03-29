@@ -7,6 +7,10 @@ import java.util.List;
 import model.entities.Individual;
 import model.entities.Pair;
 
+
+/**
+ * This is a implementation of Ordinal Coding crossover operator
+ */
 public class OrdinalCodingCross implements Cross{
 
 	@Override

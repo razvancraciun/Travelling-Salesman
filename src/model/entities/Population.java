@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import model.Distances;
 import model.cross.Cross;
-import model.misc.Distances;
 import model.misc.PopulationObserver;
 import model.mutation.Mutation;
 

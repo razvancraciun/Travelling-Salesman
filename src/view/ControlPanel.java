@@ -38,6 +38,7 @@ import model.selection.ProbabilisticTournamentSelection;
 import model.selection.RouletteSelection;
 import model.selection.Selection;
 import model.selection.TruncationSelection;
+import model.selection.UniversalStochasticSelection;
 
 public class ControlPanel extends JPanel implements AlgorithmObserver {
 
@@ -75,7 +76,7 @@ public class ControlPanel extends JPanel implements AlgorithmObserver {
 		add(_populationSize);
 		
 		Selection[] selections = {new NoSelection(),new RouletteSelection(),new TruncationSelection(),
-				new DeterministicTournamentSelection(), new ProbabilisticTournamentSelection()} ;
+				new DeterministicTournamentSelection(), new ProbabilisticTournamentSelection(), new UniversalStochasticSelection()} ;
 		JLabel selectionLabel=new JLabel("Selection:");
 		_selection=new JComboBox<Selection>(selections);
 		for(Selection s : selections) {

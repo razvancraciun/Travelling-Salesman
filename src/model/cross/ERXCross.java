@@ -6,6 +6,9 @@ import java.util.List;
 import model.entities.Individual;
 import model.entities.Pair;
 
+/**
+ * An Edge Recombination Crossover (ERX) implementation
+ */
 public class ERXCross implements Cross{
 
 	private Individual parent1;

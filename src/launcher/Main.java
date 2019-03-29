@@ -1,5 +1,7 @@
 package launcher;
 
+import javax.swing.SwingUtilities;
+
 import controller.Controller;
 import model.cross.MyCross;
 import model.entities.GeneticAlgorithm;
@@ -22,8 +24,15 @@ public class Main {
 	
 	public static void main(String[] args) {
 		init();
-		MainWindow app=new MainWindow(_ctrl);
-		app.setSize(1000,500);
-		app.setVisible(true);
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				MainWindow app=new MainWindow(_ctrl);
+				app.setSize(1000,500);
+				app.setVisible(true);
+			}			
+		});
+		
 	}
 }

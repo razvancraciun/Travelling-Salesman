@@ -3,6 +3,10 @@ package model.cross;
 import model.entities.Individual;
 import model.entities.Pair;
 
+
+/**
+ * This is a implementation of Order crossover operator (OX)
+ */
 public class OXCross implements Cross{
 
 	private Individual _parent1;

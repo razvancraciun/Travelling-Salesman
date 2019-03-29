@@ -7,20 +7,24 @@ import model.selection.Selection;
 
 public class Controller {
 	
-	private GeneticAlgorithm _alg;
+	private GeneticAlgorithm _alg;	
 	
-	
-	//TODO DOC
+	/**
+	 * Constructor: attaches the controller to the given algorithm
+	 */
 	public Controller(GeneticAlgorithm alg) {
 		_alg=alg;
 	}
 	
 	
-	//TODO DOC
+	/**
+	 * Runs the algorithm
+	 * @param generations : the number of generations to run
+	 */
 	public void run(int generations) {
 		_alg.run(generations);
-		//System.out.println(_alg);
 	}
+	
 
 	//GETTERS AND SETTERS
 	public void setAlgorithm(GeneticAlgorithm alg) {

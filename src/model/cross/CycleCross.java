@@ -3,6 +3,10 @@ package model.cross;
 import model.entities.Individual;
 import model.entities.Pair;
 
+/**
+ * A Cycle crossover method (CX) implementation
+ *
+ */
 public class CycleCross implements Cross {
 
 	@Override

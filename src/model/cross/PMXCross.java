@@ -3,6 +3,9 @@ package model.cross;
 import model.entities.Individual;
 import model.entities.Pair;
 
+/**
+ * This is a implementation of Partial Matching crossover operator (PMX)
+ */
 public class PMXCross implements Cross{
 
 	private Individual _parent1;

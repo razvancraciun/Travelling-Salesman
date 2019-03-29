@@ -13,7 +13,7 @@ public class DeterministicTournamentSelection implements Selection{
 			if(pair.getFirst().getFitness()<pair.getSecond().getFitness()) {
 				result.setIndividual(i, pair.getFirst());
 			}
-			else result.setIndividual(i, pair.getFirst());
+			else result.setIndividual(i, pair.getSecond());
 		}
 		return result;
 	}
